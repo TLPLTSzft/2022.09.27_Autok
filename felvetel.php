@@ -72,42 +72,48 @@
         $sor = implode((";"), $_POST) . PHP_EOL;
         fwrite($file, $sor);
         ?>
-        <p>Sikeres felvétel</p>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          Sikeres felvétel.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
       <?php else : ?>
-        <p><?php echo $hiba; ?></p>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <?php echo $hiba; ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
       <?php endif; ?>
     <?php
     }
     ?>
     <h1>Autók felvétele</h1>
     <form action="felvetel.php" method="post" name="auto_felvetel">
-      <div>
+      <div class="mb-3">
         <label for="rendszam_input">Rendszám</label>
-        <input type="text" name="rendszam" id="rendszam_input" placeholder="Rendszám">
+        <input class="form-control" type="text" name="rendszam" id="rendszam_input" placeholder="Rendszám">
       </div>
-      <div>
+      <div class="mb-3">
         <label for="marka_input">Márka</label>
-        <input type="text" name="marka" id="marka_input" placeholder="Márka">
+        <input class="form-control" type="text" name="marka" id="marka_input" placeholder="Márka">
       </div>
-      <div>
+      <div class="mb-3">
         <label for="modell_input">Modell</label>
-        <input type="text" name="modell" id="modell_input" placeholder="Modell">
+        <input class="form-control" type="text" name="modell" id="modell_input" placeholder="Modell">
       </div>
-      <div>
+      <div class="mb-3">
         <label for="gyartas_eve_input">Gyártás éve</label>
-        <!-- <input type="text" name="gyartas_eve" id="gyartas_eve_input" placeholder="Gyártás éve"> -->
-        <input type="number" name="gyartas_eve" id="gyartas_eve_input" placeholder="Gyártás éve">
+        <!-- <input class="form-control" type="text" name="gyartas_eve" id="gyartas_eve_input" placeholder="Gyártás éve"> -->
+        <input class="form-control" type="number" name="gyartas_eve" id="gyartas_eve_input" placeholder="Gyártás éve">
       </div>
-      <div>
+      <div class="mb-3">
         <label for="uzemanyag_input">Üzemanyag típus</label>
-        <select name="uzemanyag" id="uzemanyag_input">
+        <select class="form-select" name="uzemanyag" id="uzemanyag_input">
           <option value=""></option>
           <?php foreach ($uzemanyag_tipusok as $key => $value) : ?>
             <option value="<?php echo $key ?>"><?php echo $value ?></option>
           <?php endforeach; ?>
         </select>
       </div>
-      <button type="submit">Felvétel</button>
+      <button class="btn btn-outline-secondary" type="submit">Felvétel</button>
     </form>
   </main>
 </body>
