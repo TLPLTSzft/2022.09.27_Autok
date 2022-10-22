@@ -6,8 +6,51 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Autók</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script> -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function validalas() {
+      const rendszam = document.forms['auto_felvetel']['rendszam'].value;
+      const marka = document.forms['auto_felvetel']['marka'].value;
+      const modell = document.forms['auto_felvetel']['modell'].value;
+      const gyartas_eve = document.forms['auto_felvetel']['gyartas_eve'].value;
+      const uzemanyag = document.forms['auto_felvetel']['uzemanyag'].value;
+      if (rendszam.trim().length == 0) {
+        alert("Rendszám megadása kötelező");
+        return false;
+      }
+      if (marka.trim().length == 0) {
+        alert("Márka megadása kötelező");
+        return false;
+      }
+      if (modell.trim().length == 0) {
+        alert("Modell megadása kötelező");
+        return false;
+      }
+      if (gyartas_eve.trim().length == 0) {
+        alert("Gyártás éve megadása kötelező");
+        return false;
+      }
+      if (gyartas_eve != parseInt(gyartas_eve)) {
+        alert("Gyártás éve csak szám lehet");
+        return false;
+      }
+      const maiDatum = new Date().getFullYear();
+      if (gyartas_eve < 1900 || gyartas_eve > maiDatum) {
+        alert("Gyártás éve 1900 és " + maiDatum + " közé kell hogy essen");
+        return false;
+      }
+      if (uzemanyag.trim().length == 0) {
+        alert("Üzemanyag típus megadása kötelező");
+        return false;
+      }
+      return true;
+    }
+  </script>
 </head>
 
 <body>
@@ -86,27 +129,28 @@
     }
     ?>
     <h1>Autók felvétele</h1>
-    <form action="felvetel.php" method="post" name="auto_felvetel">
+    <form action="felvetel.php" method="post" name="auto_felvetel" onsubmit="return validalas()">
       <div class="mb-3">
         <label for="rendszam_input">Rendszám</label>
-        <input class="form-control" type="text" name="rendszam" id="rendszam_input" placeholder="Rendszám">
+        <!-- <input class="form-control" type="text" name="rendszam" id="rendszam_input" placeholder="Rendszám"> -->
+        <input class="form-control" type="text" name="rendszam" id="rendszam_input" placeholder="Rendszám" required>
       </div>
       <div class="mb-3">
         <label for="marka_input">Márka</label>
-        <input class="form-control" type="text" name="marka" id="marka_input" placeholder="Márka">
+        <input class="form-control" type="text" name="marka" id="marka_input" placeholder="Márka" required>
       </div>
       <div class="mb-3">
         <label for="modell_input">Modell</label>
-        <input class="form-control" type="text" name="modell" id="modell_input" placeholder="Modell">
+        <input class="form-control" type="text" name="modell" id="modell_input" placeholder="Modell" required>
       </div>
       <div class="mb-3">
         <label for="gyartas_eve_input">Gyártás éve</label>
-        <!-- <input class="form-control" type="text" name="gyartas_eve" id="gyartas_eve_input" placeholder="Gyártás éve"> -->
-        <input class="form-control" type="number" name="gyartas_eve" id="gyartas_eve_input" placeholder="Gyártás éve">
+        <!-- <input class="form-control" type="text" name="gyartas_eve" id="gyartas_eve_input" placeholder="Gyártás éve" required> -->
+        <input class="form-control" type="number" name="gyartas_eve" id="gyartas_eve_input" placeholder="Gyártás éve" required>
       </div>
       <div class="mb-3">
         <label for="uzemanyag_input">Üzemanyag típus</label>
-        <select class="form-select" name="uzemanyag" id="uzemanyag_input">
+        <select class="form-select" name="uzemanyag" id="uzemanyag_input" required>
           <option value=""></option>
           <?php foreach ($uzemanyag_tipusok as $key => $value) : ?>
             <option value="<?php echo $key ?>"><?php echo $value ?></option>
