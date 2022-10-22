@@ -9,6 +9,46 @@
 </head>
 
 <body>
+
+  <pre><?php print_r($_POST); ?></pre>
+
+  <?php
+  $uzemanyag_tipusok = [
+    'benzin' => "Benzin",
+    'gazolaj' => "Gázolaj",
+    'elektromos' => "Elektromos",
+    'hibrid' => "Hibrid"
+  ];
+  ?>
+
+  <?php
+  if (isset($_POST) && !empty($_POST)) {
+    $hiba = "";
+    if (!isset($_POST['rendszam']) || empty($_POST['rendszam'])) {
+      $hiba .= "Rendszám mező kitöltése kötelező. ";
+    }
+    if (!isset($_POST['marka']) || empty($_POST['marka'])) {
+      $hiba .= "Márka mező kitöltése kötelező. ";
+    }
+    if (!isset($_POST['modell']) || empty($_POST['modell'])) {
+      $hiba .= "Modell mező kitöltése kötelező. ";
+    }
+    if (!isset($_POST['gyartas_eve']) || empty($_POST['gyartas_eve'])) {
+      $hiba .= "Gyártás éve mező kitöltése kötelező. ";
+    } else if (!is_numeric($_POST['gyartas_eve']) || round($_POST['gyartas_eve']) != $_POST['gyartas_eve']) {
+      $hiba .= "Gyártás éve csak egész szám lehet. ";
+    } else if ($_POST['gyartas_eve'] < 1900 || $_POST['gyartas_eve'] > date("Y")) {
+      $hiba .= "Gyártás éve 1900 és " . date("Y") . " közé kell hogy essen. ";
+    }
+    if (!isset($_POST['uzemanyag']) || empty($_POST['uzemanyag'])) {
+      $hiba .= "Üzemanyag típus mező kitöltése kötelező. ";
+    } else if (!in_array($_POST['uzemanyag'], array_keys($uzemanyag_tipusok))) {
+      $hiba .= "Üzemanyag típust a legördülő menüből válassza ki. ";
+    }
+    echo $hiba;
+  }
+  ?>
+
   <h1>Autók felvétele</h1>
   <form action="felvetel.php" method="post" name="auto_felvetel">
 
@@ -29,6 +69,7 @@
 
     <div>
       <label for="gyartas_eve_input">Gyártás éve</label>
+      <!-- <input type="text" name="gyartas_eve" id="gyartas_eve_input" placeholder="Gyártás éve"> -->
       <input type="number" name="gyartas_eve" id="gyartas_eve_input" placeholder="Gyártás éve">
     </div>
 
@@ -36,10 +77,9 @@
       <label for="uzemanyag_input">Üzemanyag típus</label>
       <select name="uzemanyag" id="uzemanyag_input">
         <option value=""></option>
-        <option value="benzin">Benzin</option>
-        <option value="gazolaj">Gázolaj</option>
-        <option value="elektromos">Elektromos</option>
-        <option value="hibrid">Hibrid</option>
+        <?php foreach ($uzemanyag_tipusok as $key => $value) : ?>
+          <option value="<?php echo $key ?>"><?php echo $value ?></option>
+        <?php endforeach; ?>
       </select>
     </div>
 
