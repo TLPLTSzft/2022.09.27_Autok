@@ -6,12 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Autók</title>
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"> -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script> -->
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     function validalas() {
       const rendszam = document.forms['auto_felvetel']['rendszam'].value;
@@ -132,7 +128,6 @@
     <form action="felvetel.php" method="post" name="auto_felvetel" onsubmit="return validalas()">
       <div class="mb-3">
         <label for="rendszam_input">Rendszám</label>
-        <!-- <input class="form-control" type="text" name="rendszam" id="rendszam_input" placeholder="Rendszám"> -->
         <input class="form-control" type="text" name="rendszam" id="rendszam_input" placeholder="Rendszám" required>
       </div>
       <div class="mb-3">
@@ -145,7 +140,7 @@
       </div>
       <div class="mb-3">
         <label for="gyartas_eve_input">Gyártás éve</label>
-        <!-- <input class="form-control" type="text" name="gyartas_eve" id="gyartas_eve_input" placeholder="Gyártás éve" required> -->
+        <!-- <input class="form-control" type="text" name="gyartas_eve" id="gyartas_eve_input" placeholder="Gyártás éve"> -->
         <input class="form-control" type="number" name="gyartas_eve" id="gyartas_eve_input" placeholder="Gyártás éve" required>
       </div>
       <div class="mb-3">
